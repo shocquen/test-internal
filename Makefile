@@ -28,11 +28,6 @@ clean:
 	@docker volume rm $(docker volume ls -q) 2>/dev/null || true
 	@docker network rm $(docker network ls -q) 2>/dev/null || true
 
-.PHONY: fclean
-fclean: clean
-#	@rm -rf backend/node_modules && rm -rf backend/dist || true
-#	@rm -rf frontend/node_modules && rm -rf frontend/dist || true
-
 .PHONY: re
 re: fclean all
 
@@ -58,8 +53,6 @@ help:
 	@echo "  up        Run containers"
 	@echo "  down      Stop containers"
 	@echo "  clean     Stop and remove containers, images, volumes and networks"
-	@echo "  fclean    Stop and remove containers, images, volumes and networks"
-	@echo "            and clean all files"
 	@echo "  re        Run fclean and all"
 	@echo "  info      Show containers, images, volumes and networks"
 	@echo "  help      Show this help"
