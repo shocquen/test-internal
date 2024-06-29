@@ -14,3 +14,19 @@ Look to how does apple smart autocomplete work
 ### More info
 Where does the return button go? Do we already save the info?
 
+# API
+## Routes
+- getUserInfos
+
+# TODO
+## Front
+- [x] rooter
+- [ ] pages
+  - [x] 404 page
+  - [ ] index
+  - [ ] form
+  - [ ] singup
+  - [ ] recap
+
+## Back
+
