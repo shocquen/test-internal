@@ -1,5 +1,5 @@
 import api from "../api";
-import { UserBase } from "./users";
+import { UserBase, UserBasePatch } from "./users";
 
 const ENDPOINT = "users";
 
@@ -11,7 +11,17 @@ export const userApi = api.injectEndpoints({
     getUserById: builder.query<UserBase, string>({
       query: (id) => `${ENDPOINT}/${id}`,
     }),
+    updateUser: builder.mutation<UserBase, object>({
+      query: ({
+        _id,
+        ...formData
+      }: UserBasePatch) => ({
+        url: `${ENDPOINT}/${_id}`,
+        method: "PATCH",
+        body: formData
+      })
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useGetUserByIdQuery } = userApi;
+export const { useGetUsersQuery, useGetUserByIdQuery, useUpdateUserMutation } = userApi;

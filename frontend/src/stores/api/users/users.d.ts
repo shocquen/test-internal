@@ -3,8 +3,9 @@
 export type UserBase = {
   _id: string;
   email: string;
-  // TIPS: add more fields here
-  // ...
+  fistname: string;
+  lastname: string;
+  number: string;
   createdAt: Date;
   updatedAt: Date;
 };
