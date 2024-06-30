@@ -2,7 +2,7 @@ import { Button, Icon, Text, VStack } from "@chakra-ui/react";
 import { Buildings, User } from "@phosphor-icons/react";
 import { PrimaryLayout } from "../components/layouts";
 
-export default function Index() {
+export default function Confirmation() {
 	return (
 		<PrimaryLayout
 			heading="Qui êtes-vous ?"

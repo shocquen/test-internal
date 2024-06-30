@@ -29,7 +29,7 @@ clean:
 	@docker network rm $(docker network ls -q) 2>/dev/null || true
 
 .PHONY: re
-re: fclean all
+re: clean all
 
 .PHONY: info
 info:
@@ -53,7 +53,7 @@ help:
 	@echo "  up        Run containers"
 	@echo "  down      Stop containers"
 	@echo "  clean     Stop and remove containers, images, volumes and networks"
-	@echo "  re        Run fclean and all"
+	@echo "  re        Run clean and all"
 	@echo "  info      Show containers, images, volumes and networks"
 	@echo "  help      Show this help"
 
