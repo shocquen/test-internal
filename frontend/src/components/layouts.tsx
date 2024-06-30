@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import BrandTitle from "./brandTitle";
 import Hero from "./hero";
 
-interface LayoutProps {
+interface PrimaryLayoutProps {
 	heading: string;
 	text: string;
 	buttonText: string;
@@ -17,7 +17,7 @@ export function PrimaryLayout({
 	buttonText,
 	bgUrl,
 	children,
-}: LayoutProps) {
+}: PrimaryLayoutProps) {
 	return (
 		<VStack
 			height="100svh"
