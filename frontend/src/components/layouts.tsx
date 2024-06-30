@@ -2,12 +2,15 @@ import { VStack, Button, Spacer } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import BrandTitle from "./brandTitle";
 import Hero from "./hero";
+import { useNavigate } from "react-router-dom";
 
 interface PrimaryLayoutProps {
 	heading: string;
 	text: string;
 	buttonText: string;
 	bgUrl?: string;
+	isConfirmButtonDisabled: boolean;
+	formData?: object;
 	children: ReactNode;
 }
 
@@ -16,8 +19,15 @@ export function PrimaryLayout({
 	text,
 	buttonText,
 	bgUrl,
+	isConfirmButtonDisabled,
+	formData,
 	children,
 }: PrimaryLayoutProps) {
+	const navigate = useNavigate();
+	const confirmButton = () =>
+		navigate("/confirmation", {
+			state: formData,
+		});
 	return (
 		<VStack
 			height="100svh"
@@ -33,12 +43,10 @@ export function PrimaryLayout({
 			{children}
 			<Spacer />
 			<Button
-				isDisabled={true}
-				width="100%"
-				pt="10px"
-				pb="10px"
-				borderRadius="14px"
-				fontSize="xs"
+				id="confirmButton"
+				isDisabled={isConfirmButtonDisabled}
+				variant="brandAction"
+				onClick={confirmButton}
 			>
 				{buttonText}
 			</Button>
