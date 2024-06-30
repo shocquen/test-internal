@@ -14,8 +14,6 @@ const theme = extendTheme(
 	{
 		components: { Button: buttonTheme },
 		colors: {
-			primary: "#164951",
-			bg: "#F2F2F2",
 			brand: {
 				50: "#F2F2F2",
 				500: "#164951", // for colorScheme
@@ -24,8 +22,8 @@ const theme = extendTheme(
 		styles: {
 			global: {
 				body: {
-					bg: "bg",
-					color: "primary",
+					bg: "brand.50",
+					color: "brand.500",
 				},
 			},
 		},
