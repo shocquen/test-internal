@@ -35,6 +35,8 @@ Where does the return button go? Do we already save the info?
   - [x] 404 page
   - [x] index
   - [ ] form
+    - [ ] confirmation
+      - how to dinamicly change if it's a candidate or a agent?
   - [ ] singup
   - [ ] recap
 - [x] Chakra custom theme
