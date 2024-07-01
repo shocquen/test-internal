@@ -1,22 +1,45 @@
-import { Text, VStack } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
-import { PrimaryLayout } from "../components/layouts";
+import { Spacer, VStack, Heading, Button } from "@chakra-ui/react";
+import { Location, useLocation, useNavigate } from "react-router-dom";
+import BrandTitle from "../components/brandTitle";
+import { useEffect } from "react";
 
-interface state {
+interface State {
 	selected: string;
 }
 export default function Confirmation() {
-	const location = useLocation();
+	const location: Location = useLocation();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const state: State = location.state as State;
+		if (state?.selected !== "agent" && state?.selected !== "candidate") {
+			console.log("Redirecting due to invalid state...");
+			navigate("/");
+		}
+	}, [location.state, navigate]);
+
+	const confirmButton = () =>
+		navigate("/email", { state: location.state as State });
 	return (
-		<PrimaryLayout
-			heading="Qui êtes-vous ?"
-			text="Sélectionnez si vous êtes un agent ou bien si vous êtes un candidat."
-			buttonText="Connexion rapide"
-			isConfirmButtonDisabled={false}
+		<VStack
+			bgImage={"../../public/back2.png"}
+			bgPosition="top"
+			bgRepeat="no-repeat"
+			bgSize="contain"
+			height="100svh"
+			p="16px"
+			pt="500px"
 		>
-			<VStack width="full" gap="8px">
-				<Text>{(location.state as state)?.selected}</Text>
-			</VStack>
-		</PrimaryLayout>
+			<BrandTitle p="8px" />
+			<Heading textAlign="center" fontSize="36px" fontWeight={700} p="0 54px">
+				{((location.state as State)?.selected == "agent" &&
+					"Simplifiez votre gestion locative") ||
+					"Trouvez votre chez-vous"}
+			</Heading>
+			<Spacer />
+			<Button id="confirmButton" variant="brandAction" onClick={confirmButton}>
+				Connexion rapide
+			</Button>
+		</VStack>
 	);
 }
