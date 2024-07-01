@@ -1,6 +1,6 @@
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { PrimaryLayout } from "../../components/layouts";
+import PrimaryLayout from "../../components/layouts";
 import { Location, useLocation } from "react-router-dom";
 
 interface State {

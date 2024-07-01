@@ -1,5 +1,5 @@
 import { VStack, Button, Spacer } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import BrandTitle from "./brandTitle";
 import Hero from "./hero";
 
@@ -13,8 +13,7 @@ interface PrimaryLayoutProps {
 	confirmButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
 	children: ReactNode;
 }
-
-export function PrimaryLayout({
+const PrimaryLayout: React.FC<PrimaryLayoutProps> = ({
 	heading,
 	text,
 	buttonText,
@@ -22,34 +21,28 @@ export function PrimaryLayout({
 	isConfirmButtonDisabled = false,
 	confirmButton,
 	children,
-}: PrimaryLayoutProps) {
-	// const confirmButton = () =>
-	// 	navigate("/confirmation", {
-	// 		state: formData,
-	// 	});
-
-	return (
-		<VStack
-			height="100svh"
-			p="16px"
-			pt="32pxs"
-			bgImg={bgUrl ?? "../../public/back.png"}
-			bgPosition="top"
-			bgRepeat="no-repeat"
-			bgSize="contain"
+}) => (
+	<VStack
+		height="100svh"
+		p="16px"
+		pt="32pxs"
+		bgImg={bgUrl ?? "../../public/back.png"}
+		bgPosition="top"
+		bgRepeat="no-repeat"
+		bgSize="contain"
+	>
+		<BrandTitle p="80px" />
+		<Hero heading={heading} text={text} />
+		{children}
+		<Spacer />
+		<Button
+			id="confirmButton"
+			isDisabled={isConfirmButtonDisabled}
+			variant="brandAction"
+			onClick={confirmButton}
 		>
-			<BrandTitle p="80px" />
-			<Hero heading={heading} text={text} />
-			{children}
-			<Spacer />
-			<Button
-				id="confirmButton"
-				isDisabled={isConfirmButtonDisabled}
-				variant="brandAction"
-				onClick={confirmButton}
-			>
-				{buttonText}
-			</Button>
-		</VStack>
-	);
-}
+			{buttonText}
+		</Button>
+	</VStack>
+);
+export default PrimaryLayout;

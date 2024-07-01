@@ -1,10 +1,10 @@
 import { Button, Icon, Text, VStack } from "@chakra-ui/react";
 import { Buildings, User } from "@phosphor-icons/react";
-import { PrimaryLayout } from "../components/layouts";
+import PrimaryLayout from "../components/layouts";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Index() {
+const Index: React.FC = () => {
 	const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 	const [whichButtonSelected, setButtonSelected] = useState("candidate");
 
@@ -62,4 +62,6 @@ export default function Index() {
 			</VStack>
 		</PrimaryLayout>
 	);
-}
+};
+
+export default Index;
