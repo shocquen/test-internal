@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/error";
 import Index from "./pages/index";
 import Confirmation from "./pages/confirmation";
-import OldIndex from "./pages/oldIndex";
 import Email from "./pages/forms/email";
 
 const router = createBrowserRouter([
@@ -19,12 +18,6 @@ const router = createBrowserRouter([
 	{
 		path: "/email",
 		element: <Email />,
-		errorElement: <ErrorPage />,
-	},
-
-	{
-		path: "/old",
-		element: <OldIndex />,
 		errorElement: <ErrorPage />,
 	},
 ]);

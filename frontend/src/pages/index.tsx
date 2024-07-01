@@ -5,28 +5,27 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Index: React.FC = () => {
-	const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-	const [whichButtonSelected, setButtonSelected] = useState("candidate");
+	const [userType, setUserType] = useState<string | null>(null);
 
-	const enableConfirmButton = function (
-		event: React.MouseEvent<HTMLButtonElement>
-	) {
+	const enableConfirmButton = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
-		setIsButtonDisabled(false);
-		setButtonSelected(event.currentTarget.name);
+		event.stopPropagation();
+		setUserType(event.currentTarget.name);
 	};
+
 	const navigate = useNavigate();
 
 	const handleSubmit = () =>
 		navigate("/confirmation", {
-			state: { selected: whichButtonSelected },
+			state: { selected: userType },
 		});
+
 	return (
 		<PrimaryLayout
 			heading="Qui êtes-vous ?"
 			text="Sélectionnez si vous êtes un agent ou bien si vous êtes un candidat."
 			buttonText="Connexion rapide"
-			isConfirmButtonDisabled={isButtonDisabled}
+			isConfirmButtonDisabled={userType === null}
 			confirmButton={handleSubmit}
 		>
 			<VStack width="full" gap="8px">

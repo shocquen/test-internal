@@ -30,6 +30,7 @@ const PrimaryLayout: React.FC<PrimaryLayoutProps> = ({
 		bgPosition="top"
 		bgRepeat="no-repeat"
 		bgSize="contain"
+		gap="8px"
 	>
 		<BrandTitle p="80px" />
 		<Hero heading={heading} text={text} />

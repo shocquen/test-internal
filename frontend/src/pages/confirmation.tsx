@@ -4,15 +4,17 @@ import BrandTitle from "../components/brandTitle";
 import { useEffect } from "react";
 
 interface State {
-	selected: string;
+	selected: string | null;
 }
-export default function Confirmation() {
+
+const Confirmation: React.FC = () => {
 	const location: Location = useLocation();
 	const navigate = useNavigate();
+	const state = location.state as State;
 
 	useEffect(() => {
 		const state: State = location.state as State;
-		if (state?.selected !== "agent" && state?.selected !== "candidate") {
+		if (state?.selected == null) {
 			console.log("Redirecting due to invalid state...");
 			navigate("/");
 		}
@@ -20,6 +22,7 @@ export default function Confirmation() {
 
 	const confirmButton = () =>
 		navigate("/email", { state: location.state as State });
+
 	return (
 		<VStack
 			bgImage={"../../public/back2.png"}
@@ -32,8 +35,7 @@ export default function Confirmation() {
 		>
 			<BrandTitle p="8px" />
 			<Heading textAlign="center" fontSize="36px" fontWeight={700} p="0 54px">
-				{((location.state as State)?.selected == "agent" &&
-					"Simplifiez votre gestion locative") ||
+				{(state?.selected == "agent" && "Simplifiez votre gestion locative") ||
 					"Trouvez votre chez-vous"}
 			</Heading>
 			<Spacer />
@@ -42,4 +44,6 @@ export default function Confirmation() {
 			</Button>
 		</VStack>
 	);
-}
+};
+
+export default Confirmation;
