@@ -3,6 +3,7 @@ import ErrorPage from "./pages/error";
 import Index from "./pages/index";
 import Confirmation from "./pages/confirmation";
 import OldIndex from "./pages/oldIndex";
+import Email from "./pages/forms/email";
 
 const router = createBrowserRouter([
 	{
@@ -15,6 +16,12 @@ const router = createBrowserRouter([
 		element: <Confirmation />,
 		errorElement: <ErrorPage />,
 	},
+	{
+		path: "/email",
+		element: <Email />,
+		errorElement: <ErrorPage />,
+	},
+
 	{
 		path: "/old",
 		element: <OldIndex />,
