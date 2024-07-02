@@ -5,6 +5,8 @@ export interface IUser extends mongoose.Document {
 	last_name: string;
 	email: string;
 	number: string;
+	expiration: Date;
+	otp: string;
 	createdAt: Date;
 	updatedAt: Date;
 }
@@ -18,6 +20,25 @@ const userSchema: mongoose.Schema<IUser> = new mongoose.Schema(
 		last_name: {
 			type: String,
 			default: null,
+		},
+		email: {
+			type: String,
+			default: null,
+			required: true,
+			unique: true,
+		},
+		number: {
+			type: String,
+			default: null,
+		},
+		expiration: {
+			type: Date,
+			default: null,
+		},
+		otp: {
+			type: String,
+			default: null,
+			select: false,
 		},
 	},
 	{ timestamps: true, versionKey: false }
