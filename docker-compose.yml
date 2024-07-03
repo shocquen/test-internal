@@ -1,10 +1,10 @@
 services:
   backend:
     image: backend
-    container_name: backend_dev
+    container_name: backend_dev_queeps
     build: ./backend
     volumes:
-      - backend_dev:/app
+      - backend_data_queeps:/app
       - /app/node_modules # prevent node_modules from being overwritten
     restart: always
     ports:
@@ -15,10 +15,10 @@ services:
 
   frontend:
     image: frontend
-    container_name: frontend_dev
+    container_name: frontend_dev_queeps
     build: ./frontend
     volumes:
-      - frontend_dev:/app
+      - frontend_data_queeps:/app
       - /app/node_modules # prevent node_modules from being overwritten
     restart: always
     ports:
@@ -28,7 +28,7 @@ services:
 
   mongodb:
     image: mongo
-    container_name: mongo_dev
+    container_name: mongo_dev_queeps
     restart: always
     expose:
       - 27017
@@ -43,7 +43,7 @@ services:
 
   mongo-express:
     image: mongo-express
-    container_name: mongo-express_dev
+    container_name: mongo-express_dev_queeps
     restart: always
     depends_on:
       - mongodb
@@ -61,15 +61,15 @@ volumes:
   db_data:
     name: db_data
     driver: local
-  backend_dev:
-    name: backend_dev
+  backend_data_queeps:
+    name: backend_data_queeps
     driver: local
     driver_opts:
       type: none
       device: ./backend
       o: bind
-  frontend_dev:
-    name: frontend_dev
+  frontend_data_queeps:
+    name: frontend_data_queeps
     driver: local
     driver_opts:
       type: none
