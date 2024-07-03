@@ -10,7 +10,9 @@ interface PrimaryLayoutProps {
 	bgUrl?: string;
 	isConfirmButtonDisabled?: boolean;
 	formData?: object;
-	confirmButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
+	confirmButton: (
+		event: React.MouseEvent<HTMLButtonElement>
+	) => void | Promise<void>;
 	children: ReactNode;
 }
 const PrimaryLayout: React.FC<PrimaryLayoutProps> = ({
