@@ -12,10 +12,10 @@ const userController = new UserController();
 
 // * Would require a ratelimit
 router.post("/", userController.addUser);
-router.get("/:id/otp", userController.verifyOTP);
 router.post("/:id/otp", userController.generateOTP);
+router.get("/:id/otp", userController.verifyOTP);
 
 router.get("/me", validateApiAccess, userController.getMe);
-router.post("/me", validateApiAccess, userController.updateMe);
+router.patch("/me", validateApiAccess, userController.updateMe);
 
 export { router as userRouter };
