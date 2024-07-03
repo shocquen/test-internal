@@ -1,31 +1,53 @@
-import { FormControl, FormLabel, Input } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import {
+	FormControl,
+	FormLabel,
+	Icon,
+	Input,
+	InputGroup,
+	InputLeftAddon,
+	useToast,
+} from "@chakra-ui/react";
+import { At } from "@phosphor-icons/react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PrimaryLayout from "../../components/layouts";
-import { Location, useLocation, useNavigate } from "react-router-dom";
-
-interface State {
-	selected: string | null;
-}
+import { useCreateUserMutation } from "../../stores/api/users";
 
 const Email: React.FC = () => {
+	const userType = localStorage.getItem("userType");
 	const [email, setEmail] = useState("");
+	const [createUser] = useCreateUserMutation();
 
 	const navigate = useNavigate();
-	const location: Location = useLocation();
-	const state = location.state as State;
+	const toast = useToast();
 
 	useEffect(() => {
-		const state: State = location.state as State;
-		if (state?.selected == null) {
+		if (!userType) {
 			console.log("Redirecting due to invalid state...");
 			navigate("/");
 		}
-	}, [location.state, navigate]);
-	// const navigate = useNavigate();
+	});
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		// Handle form submission logic here
+		if (!emailIsValid) {
+			try {
+				const user = await createUser({ email }).unwrap();
+				console.log("User created successfully", user);
+				localStorage.setItem("userId", user._id);
+				navigate("/otp");
+			} catch (error) {
+				console.error("Failed to create user", error);
+				toast({
+					title: "Error creating user.",
+					description:
+						"Oh nooo an error... Maybe you try to duplicate a email?",
+					status: "error",
+					duration: 9000,
+					isClosable: true,
+				});
+			}
+		}
 	};
 
 	const emailIsValid = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -34,7 +56,7 @@ const Email: React.FC = () => {
 		<PrimaryLayout
 			heading="Renseigner votre email"
 			text={
-				(state?.selected == "agent" &&
+				(userType == "agent" &&
 					"Aidez des milliers de locataires à trouver leur bonheur sur Qeeps !") ||
 				"Rejoignez des milliers de locataires qui ont trouvés leur bonheur sur Qeeps !"
 			}
@@ -47,14 +69,31 @@ const Email: React.FC = () => {
 				justifyContent="center"
 				alignItems="center"
 				isInvalid={emailIsValid}
+				padding="32px"
+				borderRadius="14px"
+				bg="whiteAlpha.500"
+				border="1px solid"
+				borderColor="blackAlpha.200"
 			>
 				<FormLabel textAlign="center">Votre e-mail</FormLabel>
-				<Input
-					placeholder=" @  |  maildecontact@example.com"
-					type="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-				/>
+				<InputGroup borderRadius="14px" bg="white">
+					<InputLeftAddon
+						borderRadius="14px 0 0 14px"
+						color="gray.400"
+						gap="8px"
+						bg="inherit"
+					>
+						<Icon as={At} transform="rotate(90deg)" />
+					</InputLeftAddon>
+					<Input
+						borderRadius="14px"
+						id="email"
+						type="email"
+						placeholder="maildecontact@example.com"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</InputGroup>
 			</FormControl>
 		</PrimaryLayout>
 	);
