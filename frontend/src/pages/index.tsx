@@ -15,10 +15,11 @@ const Index: React.FC = () => {
 
 	const navigate = useNavigate();
 
-	const handleSubmit = () =>
-		navigate("/confirmation", {
-			state: { selected: userType },
-		});
+	const handleSubmit = () => {
+		if (!userType) return;
+		localStorage.setItem("userType", userType);
+		navigate("/confirmation");
+	};
 
 	return (
 		<PrimaryLayout

@@ -8,7 +8,7 @@ interface HeroProps {
 export default function Hero({ heading, text }: HeroProps) {
 	return (
 		<Box width="full" mb="16px">
-			<Heading size="md" mb="8px">
+			<Heading as="h2" size="md" mb="8px">
 				{heading}
 			</Heading>
 			<Text fontSize="xs" color="gray">

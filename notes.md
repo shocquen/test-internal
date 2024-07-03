@@ -10,7 +10,7 @@ Might be intersting to look for a more transparent way to connect for agents, ca
 
 ### 2nd page
 
-Change dinamicly the text "Rejoignez des milliers de locataires [...]" if you connect as an agent
+Change dynamically the text "Rejoignez des milliers de locataires [...]" if you connect as an agent
 
 ### OTP
 
@@ -31,14 +31,23 @@ Where does the return button go? Do we already save the info?
 ## Front
 
 - [x] rooter
-- [ ] pages
+- [x] pages
   - [x] 404 page
   - [x] index
-  - [ ] form
-    - [ ] confirmation
-      - how to dinamicly change if it's a candidate or a agent?
-  - [ ] singup
-  - [ ] recap
+  - [x] form
+    - [x] email
+    - [x] confirmation
+    - [x] singup
+  - [x] recap
 - [x] Chakra custom theme
+- [x] RTK setup use of Bearer token
 
 ## Back
+
+- [x] JWT
+- [x] middleware
+- [x] routes
+
+# Tips
+
+You can `localStorate.clear()` at any time to disconnect

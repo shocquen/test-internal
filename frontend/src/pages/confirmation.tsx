@@ -1,27 +1,20 @@
 import { Spacer, VStack, Heading, Button } from "@chakra-ui/react";
-import { Location, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BrandTitle from "../components/brandTitle";
 import { useEffect } from "react";
 
-interface State {
-	selected: string | null;
-}
-
 const Confirmation: React.FC = () => {
-	const location: Location = useLocation();
 	const navigate = useNavigate();
-	const state = location.state as State;
+	const userType = localStorage.getItem("userType");
 
 	useEffect(() => {
-		const state: State = location.state as State;
-		if (state?.selected == null) {
+		if (!userType) {
 			console.log("Redirecting due to invalid state...");
 			navigate("/");
 		}
-	}, [location.state, navigate]);
+	});
 
-	const confirmButton = () =>
-		navigate("/email", { state: location.state as State });
+	const confirmButton = () => navigate("/email");
 
 	return (
 		<VStack
@@ -35,7 +28,7 @@ const Confirmation: React.FC = () => {
 		>
 			<BrandTitle p="8px" />
 			<Heading textAlign="center" fontSize="36px" fontWeight={700} p="0 54px">
-				{(state?.selected == "agent" && "Simplifiez votre gestion locative") ||
+				{(userType == "agent" && "Simplifiez votre gestion locative") ||
 					"Trouvez votre chez-vous"}
 			</Heading>
 			<Spacer />
